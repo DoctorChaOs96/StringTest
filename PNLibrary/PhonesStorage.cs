@@ -92,8 +92,21 @@
         {
             if (!File.Exists(DbFilePath))
             {
-                throw new DbFileNotFoundException();
+                using (File.Create(DbFilePath)) ;
             }
+        }
+
+        public void Search(string searchKey)
+        {
+            var searchRecords = GetAllRecord()
+                .Select(DeserializeRecord)
+                .Where(entity => 
+                    entity != null && (entity.FirstName.Equals(searchKey, StringComparison.OrdinalIgnoreCase)
+                    || entity.LastName.Equals(searchKey, StringComparison.OrdinalIgnoreCase)
+                    || entity.PhoneNumber.Equals(searchKey, StringComparison.OrdinalIgnoreCase)))
+                .ToList();
+
+            searchRecords.ForEach(Print);
         }
     }
 }

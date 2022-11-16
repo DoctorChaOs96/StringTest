@@ -9,12 +9,12 @@ namespace Text
         {
             do
             {
-                Console.WriteLine("Choose operation (-g) - genarate, (-c) - create, (-out) - exit, (-p) - print all, (-e) - edit:");
+                Console.WriteLine("Choose operation (-g) - genarate, (-c) - create, (-out) - exit, (-p) - print all, (-e) - edit, (-s) - search:");
 
                 string input = Console.ReadLine();
 
                 PhonesStorage storage = new PhonesStorage();
-                
+
                 switch (input)
                 {
                     case "-g":
@@ -31,6 +31,9 @@ namespace Text
                         break;
                     case "-out":
                         goto Exit;
+                    case "-s":
+                        storage.Search(Console.ReadLine());
+                        break;
                     default:
                         continue;
                 }
